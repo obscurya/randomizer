@@ -2,7 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font: 16px sans-serif;
+    font: 18px 'PT Sans';
+}
+
+body {
+    background: #fff;
 }
 
 .wrapper {
@@ -17,10 +21,12 @@ p {
 textarea {
     resize: none;
     width: 100%;
-    border: 1px solid #000;
-    background: #fff;
+    border: solid #9E9E9E;
+    border-width: 0;
+    background: #EEEEEE;
     padding: 15px;
     height: 200px;
+    border-radius: 5px;
 }
 
 textarea:focus {
@@ -30,12 +36,25 @@ textarea:focus {
 button {
     display: block;
     margin: 30px auto;
-    border: 1px solid #000;
-    background: #fff;
-    padding: 15px;
+    border: solid #9E9E9E;
+    border-width: 0 0 2px 0;
+    background: #EEEEEE;
+    padding: 15px 30px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+    background: #E0E0E0;
+}
+
+button:focus {
+    outline: none;
 }
 
 canvas {
     display: none;
     margin: auto;
+    max-width: 100%;
 }

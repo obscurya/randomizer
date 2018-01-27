@@ -3,7 +3,7 @@ var text = document.getElementById('text'),
     c = canvas.getContext('2d'),
     options = [];
 
-// text.value = 'option 1\noption 2';
+// text.value = 'option 1        \n  option 2';
 
 function color(red, green, blue, alpha) {
     return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha / 255 + ')';
@@ -39,13 +39,13 @@ class Option {
         this.y = chh + radius * Math.sin(angle);
     }
 
-    draw(chw, chh, radius) {
+    draw(chw, chh, radius, length) {
         c.fillStyle = this.color;
         c.strokeStyle = color(0, 0, 0, 255);
         c.lineWidth = 2;
 
         c.beginPath();
-        c.moveTo(chw, chh);
+        if (length > 1) c.moveTo(chw, chh);
         c.arc(chw, chh, radius, this.angle1, this.angle2);
         c.closePath();
         c.fill();
@@ -149,7 +149,7 @@ function randomize() {
         chh = canvas.height / 2;
 
     function clear() {
-        c.fillStyle = color(225, 225, 225, 255);
+        c.fillStyle = color(255, 255, 255, 255);
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.fillRect(0, 0, canvas.width, canvas.height);
     }
@@ -160,7 +160,7 @@ function randomize() {
         radius = Math.floor(canvas.width / 3);
 
     for (var i = 0; i < textSplit.length; i++) {
-        options.push(new Option(textSplit[i], angle, angle + step, radius, chw, chh));
+        options.push(new Option(textSplit[i].trim(), angle, angle + step, radius, chw, chh));
         angle += step;
     }
 
@@ -170,7 +170,7 @@ function randomize() {
         clear();
 
         for (var i = 0; i < options.length; i++) {
-            options[i].draw(chw, chh, radius);
+            options[i].draw(chw, chh, radius, options.length);
         }
 
         for (var i = 0; i < options.length; i++) {
@@ -185,3 +185,5 @@ function randomize() {
 
     draw();
 }
+
+// randomize();
