@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: 16px sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 30px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    border: 1px solid #000;
+    background: #fff;
+    padding: 15px;
+    height: 200px;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+button {
+    display: block;
+    margin: 30px auto;
+    border: 1px solid #000;
+    background: #fff;
+    padding: 15px;
+}
+
+canvas {
+    display: none;
+    margin: auto;
+}
