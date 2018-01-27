@@ -3,10 +3,10 @@ var text = document.getElementById('text'),
     c = canvas.getContext('2d'),
     options = [];
 
-// text.value = 'option 1        \n  option 2';
+text.value = 'option 1        \n  option 2';
 
-function color(red, green, blue, alpha) {
-    return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha / 255 + ')';
+function color(rgba) {
+    return 'rgba(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ', ' + rgba[3] / 255 + ')';
 }
 
 function random(min, max) {
@@ -18,13 +18,15 @@ function randomDouble(min, max) {
 }
 
 function randomColor(alpha, min) {
-    var rgb = [];
+    var rgba = [];
 
     for (var i = 0; i < 3; i++) {
-        rgb[i] = (min) ? random(min, 255) : random(0, 255);
+        rgba[i] = (min) ? random(min, 255) : random(0, 255);
     }
 
-    return color(rgb[0], rgb[1], rgb[2], alpha);
+    rgba.push(alpha);
+
+    return color(rgba);
 }
 
 class Option {
@@ -41,7 +43,7 @@ class Option {
 
     draw(chw, chh, radius, length) {
         c.fillStyle = this.color;
-        c.strokeStyle = color(0, 0, 0, 255);
+        c.strokeStyle = color([0, 0, 0, 255]);
         c.lineWidth = 2;
 
         c.beginPath();
@@ -59,13 +61,13 @@ class Option {
 
         var width = c.measureText(this.text).width + 20;
 
-        c.fillStyle = color(255, 255, 255, 255);
-        c.strokeStyle = color(0, 0, 0, 255);
+        c.fillStyle = color([255, 255, 255, 255]);
+        c.strokeStyle = color([0, 0, 0, 255]);
         c.lineWidth = 2;
         c.fillRect(Math.floor(this.x - width / 2), Math.floor(this.y - fontSize), Math.floor(width), Math.floor(fontSize * 2));
         c.strokeRect(Math.floor(this.x - width / 2), Math.floor(this.y - fontSize), Math.floor(width), Math.floor(fontSize * 2));
 
-        c.fillStyle = color(0, 0, 0, 255);
+        c.fillStyle = color([0, 0, 0, 255]);
         c.textAlign = 'center';
         c.textBaseline = 'middle';
         c.fillText(this.text, this.x, this.y);
@@ -73,11 +75,11 @@ class Option {
 }
 
 class Arrow {
-    constructor(width, height, radius) {
+    constructor(chw, chh, radius) {
         this.angle = 0;
         this.radius = Math.floor(radius / 4);
-        this.cx = width / 2;
-        this.cy = height / 2;
+        this.cx = chw;
+        this.cy = chh;
         this.size = this.radius * 2;
         this.xx = this.cx
         this.coordinates(this.angle);
@@ -93,7 +95,7 @@ class Arrow {
     }
 
     draw() {
-        c.fillStyle = color(0, 0, 0, 255);
+        c.fillStyle = color([0, 0, 0, 255]);
 
         c.beginPath();
         c.moveTo(this.x, this.y);
@@ -103,7 +105,7 @@ class Arrow {
         c.fill();
 
         c.fillStyle = this.color;
-        c.strokeStyle = color(0, 0, 0, 255);
+        c.strokeStyle = color([0, 0, 0, 255]);
         c.lineWidth = Math.floor(this.radius / 4);
 
         c.beginPath();
@@ -149,7 +151,7 @@ function randomize() {
         chh = canvas.height / 2;
 
     function clear() {
-        c.fillStyle = color(255, 255, 255, 255);
+        c.fillStyle = color([255, 255, 255, 255]);
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.fillRect(0, 0, canvas.width, canvas.height);
     }
@@ -164,7 +166,7 @@ function randomize() {
         angle += step;
     }
 
-    var arrow = new Arrow(canvas.width, canvas.height, radius);
+    var arrow = new Arrow(chw, chh, radius);
 
     function draw() {
         clear();
@@ -186,4 +188,4 @@ function randomize() {
     draw();
 }
 
-// randomize();
+randomize();
