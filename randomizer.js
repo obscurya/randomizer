@@ -3,7 +3,7 @@ var text = document.getElementById('text'),
     c = canvas.getContext('2d'),
     options = [];
 
-text.value = 'option 1        \n  option 2';
+// text.value = 'option 1        \n  option 2';
 
 function color(rgba) {
     return 'rgba(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ', ' + rgba[3] / 255 + ')';
@@ -188,4 +188,4 @@ function randomize() {
     draw();
 }
 
-randomize();
+// randomize();
